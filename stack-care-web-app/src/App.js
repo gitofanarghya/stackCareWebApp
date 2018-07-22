@@ -1,19 +1,43 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import LoginComponent from './components/LoginComponent';
+import NavBar from './components/NavBar';
+import NavBarDrawer from './components/NavBarDrawer';
+import Home from './components/Home';
+import Grid from '@material-ui/core/Grid';
+import classNames from 'classnames';
 
 class App extends Component {
+  state = {
+    auth: false
+  }
+
+  login = () => {
+    this.setState({
+      auth: true
+    })
+  }
+
+  logout = () => {
+    this.setState({
+      auth: false
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      this.state.auth ? 
+        <NavBarDrawer>
+          <Home />
+        </NavBarDrawer>
+      :
+        <NavBar>
+            <Grid container className={classNames("App", "flex-item", "loginGrid")} justify="center" alignItems="center">
+              <Grid item>
+                <LoginComponent login={this.login} logout={this.logout} />
+              </Grid>
+            </Grid>
+        </NavBar>
     );
   }
 }

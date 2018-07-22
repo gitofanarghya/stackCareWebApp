@@ -1,5 +1,25 @@
 .App {
-  text-align: center;
+  background-image: url('/img/IIot_Index.jpg');
+  background-repeat: no-repeat;
+}
+
+.App-grid {
+  height: 100%;
+}
+
+.container-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-item {
+  flex-grow: 1;
+  flex-basis: auto;
 }
 
 .App-logo {
