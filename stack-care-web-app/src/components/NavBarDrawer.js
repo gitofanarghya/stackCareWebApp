@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -8,10 +8,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { mailFolderListItems, otherMailFolderListItems } from './menu-data';
 
 const drawerWidth = 240;
@@ -29,103 +25,44 @@ const styles = theme => ({
     width: '100%',
   },
   appBar: {
-    position: 'absolute',
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
-  'appBarShift-left': {
+  'appBar-left': {
     marginLeft: drawerWidth,
   },
-  'appBarShift-right': {
+  'appBar-right': {
     marginRight: drawerWidth,
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 20,
-  },
-  hide: {
-    display: 'none',
   },
   drawerPaper: {
     position: 'relative',
     width: drawerWidth,
   },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
+  toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  'content-left': {
-    marginLeft: -drawerWidth,
-  },
-  'content-right': {
-    marginRight: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  'contentShift-left': {
-    marginLeft: 0,
-  },
-  'contentShift-right': {
-    marginRight: 0,
+    padding: theme.spacing.unit * 3,
   },
 });
 
-class PersistentDrawer extends React.Component {
+class NavBarDrawer extends React.Component {
   state = {
-    open: false,
-    anchor: 'left'
-  };
-
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
+    anchor: 'left',
   };
 
   render() {
-    const { classes, theme, children } = this.props;
-    const { anchor, open } = this.state;
+    const { classes, children } = this.props;
+    const { anchor } = this.state;
 
     const drawer = (
       <Drawer
-        variant="persistent"
-        anchor={anchor}
-        open={open}
+        variant="permanent"
         classes={{
           paper: classes.drawerPaper,
         }}
+        anchor={anchor}
       >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={this.handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
+        <div className={classes.toolbar} />
         <Divider />
         <List>{mailFolderListItems}</List>
         <Divider />
@@ -135,39 +72,22 @@ class PersistentDrawer extends React.Component {
 
     return (
       <div className={classes.root}>
-        
         <div className={classes.appFrame}>
           <AppBar
-            className={classNames(classes.appBar, {
-              [classes.appBarShift]: open,
-              [classes[`appBarShift-${anchor}`]]: open,
-            })}
+            position="absolute"
+            className={classNames(classes.appBar, classes[`appBar-${anchor}`])}
           >
-            <Toolbar disableGutters={!open}>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classNames(classes.menuButton, open && classes.hide)}
-              >
-                <MenuIcon />
-              </IconButton>
+            <Toolbar>
               <Typography variant="title" color="inherit" noWrap>
-                Stack Care Web App
+                Dashboard
               </Typography>
             </Toolbar>
           </AppBar>
           {drawer}
-          <main
-            className={classNames(classes.content, classes[`content-${anchor}`], {
-              [classes.contentShift]: open,
-              [classes[`contentShift-${anchor}`]]: open,
-            })}
-          >
-            <div className={classes.drawerHeader} />
-            <Fragment>
-                {children}
-            </Fragment>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Typography>{'You think water moves fast? You should see ice.'}</Typography>
+            {children}
           </main>
         </div>
       </div>
@@ -175,9 +95,8 @@ class PersistentDrawer extends React.Component {
   }
 }
 
-PersistentDrawer.propTypes = {
+NavBarDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(PersistentDrawer);
+export default withStyles(styles)(NavBarDrawer);

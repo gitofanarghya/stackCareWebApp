@@ -8,8 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 
 const styles = {
     card: {
-        minWidth: 275,
-        maxWidth: 450
+        minWidth: 320,
+        maxWidth: 550
       },
       media: {
         paddingTop: '56.25%', // 16:9
@@ -81,6 +81,7 @@ class LoginComponent extends Component {
                             className="email-field"
                             margin="normal"
                             onChange={this.onchange}
+                            fullWidth
                         />
                         <br />
                         <TextField
@@ -92,11 +93,13 @@ class LoginComponent extends Component {
                             autoComplete="current-password"
                             margin="normal"
                             onChange={this.onchange}
+                            fullWidth
                         />
                         <br />
-                        <Button variant="outlined" color="primary" type="submit" className="submit-button">
+                        <br />
+                        <center><Button type="submit" className="submit-button">
                             Login
-                        </Button>
+                        </Button></center>
                     </form>
                 </CardContent>
             </Card>
