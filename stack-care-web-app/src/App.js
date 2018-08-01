@@ -9,12 +9,14 @@ import classNames from 'classnames';
 
 class App extends Component {
   state = {
-    auth: false
+    auth: false,
+    accessToken: ""
   }
 
-  login = () => {
+  login = (accessToken) => {
     this.setState({
-      auth: true
+      auth: true,
+      accessToken: accessToken
     })
   }
 
@@ -28,7 +30,9 @@ class App extends Component {
     return (
       this.state.auth ? 
         <NavBarDrawer>
-          <Home />
+          <div className={classNames("flex", "flex-row")}>
+            <Home />
+          </div>
         </NavBarDrawer>
       :
         <NavBar>

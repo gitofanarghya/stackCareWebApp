@@ -3,6 +3,11 @@
   background-repeat: no-repeat;
 }
 
+.logobg {
+  background-image: url('/img/logo.png');
+  background-size: contain;
+}
+
 .App-grid {
   height: 100%;
 }
@@ -40,6 +45,35 @@
 
 .App-intro {
   font-size: large;
+}
+
+.flex {
+  display: flex;
+  flex-grow: 1;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.map-grid {
+  padding: 10px;
+}
+
+.someComponent-grid {
+  padding: 10px;
+}
+
+.dash-right-grid {
+  padding: 10px;
+}
+
+.dash-left-grid {
+  flex-wrap: nowrap !important;
 }
 
 @keyframes App-logo-spin {

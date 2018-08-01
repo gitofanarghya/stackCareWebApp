@@ -1,23 +1,19 @@
 import React from "react";
 import L from "leaflet";
 import "../../node_modules/leaflet/dist/leaflet.css"
+import Grid from '@material-ui/core/Grid'
 
 const style = {
-  width: "800px",
-  height: "800px"
+  height: "100%"
 };
 
 class Map extends React.Component {
   componentDidMount() {
-    // create map
     this.map = L.map("map", {
-      center: [49.8419, 24.0315],
-      zoom: 16,
+      center: [35.1439, -97.0315],
+      zoom: 4,
       layers: [
-        L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-          attribution:
-            '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        })
+        L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png")
       ]
     });
 
@@ -38,7 +34,7 @@ class Map extends React.Component {
   }
   render() {
   return (
-    <div id="map" style={style} />
+    <Grid item sm={12} id="map" style={style} />
     );
   }
 }

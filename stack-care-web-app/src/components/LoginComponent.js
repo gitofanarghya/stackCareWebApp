@@ -36,8 +36,8 @@ class LoginComponent extends Component {
 
         let data = JSON.stringify({
             "grant_type": "password",
-            "email": this.state.email,
-            "password": this.state.pass,
+            "email": this.state.email,//"anarghya@stacklighting.com",
+            "password": this.state.pass,//"Abcd1234@",
             "client_id": "rTZ61c51XXJriPBSoGReIeZ7W7MjWy"
         });
 
@@ -45,7 +45,7 @@ class LoginComponent extends Component {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
-            credentials: "include",
+            credentials: "omit",
             headers: {
                 "Content-Type": "application/json; charset=utf-8"
             },
@@ -53,12 +53,10 @@ class LoginComponent extends Component {
         })
         .then(response => response.json())
         .then(response => {
-            console.log(`response: ${response}`)
-            this.props.login()
+            this.props.login(response.access_token)
         })
         .catch(error => {
             console.error(`Fetch Error =\n`, error)
-            this.props.login()
         })
 
     }

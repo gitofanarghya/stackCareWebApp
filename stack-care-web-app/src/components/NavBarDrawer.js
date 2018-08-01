@@ -62,7 +62,7 @@ class NavBarDrawer extends React.Component {
         }}
         anchor={anchor}
       >
-        <div className={classes.toolbar} />
+        <div className={classNames(classes.toolbar, 'logobg')} />
         <Divider />
         <List>{mailFolderListItems}</List>
         <Divider />
@@ -84,9 +84,8 @@ class NavBarDrawer extends React.Component {
             </Toolbar>
           </AppBar>
           {drawer}
-          <main className={classes.content}>
+          <main className={classNames("App", "flex", "flex-column", classes.content)}>
             <div className={classes.toolbar} />
-            <Typography>{'You think water moves fast? You should see ice.'}</Typography>
             {children}
           </main>
         </div>
