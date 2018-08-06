@@ -11,28 +11,31 @@ import ErrorIcon from '@material-ui/icons/Error';
 
 const styles = {
   avatar: {
-    margin: 0,
+    margin: 10,
   },
   orangeAvatar: {
-    color: '#fff',
-    backgroundColor: orange[500],
+    color: orange[500],
+    margin: 10,
+    //backgroundColor: orange[500],
   },
   redAvatar: {
-    color: '#fff',
-    backgroundColor: red[500],
+    color: red[500],
+    margin: 10,
+    //backgroundColor: red[500],
   },
   greenAvatar: {
-    color: '#fff',
-    backgroundColor: green[500],
+    color: green[500],
+    margin: 10,
+    //backgroundColor: green[500],
   },
 };
 
 function IconAvatars(props) {
   const { classes, status } = props;
   return (
-    <Avatar className={status === 0 ? classes.greenAvatar : status === 1 ? classes.orangeAvatar : classes.redAvatar }>
-        {status === 0 ? <DoneIcon /> : status === 1 ? <WarningIcon /> : <ErrorIcon /> }
-    </Avatar>
+    <div className={status === 0 ? classes.greenAvatar : status === 1 ? classes.orangeAvatar : classes.redAvatar }>
+        {status === 0 ? <DoneIcon style={{ fontSize: 30 }}/> : status === 1 ? <WarningIcon style={{ fontSize: 30 }} /> : <ErrorIcon style={{ fontSize: 30 }} /> }
+    </div>
   );
 }
 

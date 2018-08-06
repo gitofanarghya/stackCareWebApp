@@ -1,42 +1,55 @@
-import React from "react";
-import L from "leaflet";
-import "../../node_modules/leaflet/dist/leaflet.css"
-import Grid from '@material-ui/core/Grid'
+import React from 'react'
+import Highcharts from 'highcharts'
+import HC_map from 'highcharts/modules/map'
+import HighchartsReact from 'highcharts-react-official'
+import mapData from './mapData'
+import proj4 from 'proj4'
+import orange from '@material-ui/core/colors/orange';
 
-const style = {
-  height: "100%"
-};
+HC_map(Highcharts)
 
-class Map extends React.Component {
-  componentDidMount() {
-    this.map = L.map("map", {
-      center: [35.1439, -97.0315],
-      zoom: 4,
-      layers: [
-        L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png")
-      ]
-    });
+const Map = ({markersData}) => {
+  window.proj4 = proj4
 
-    // fix for library issue not rendering marker.
-    this.customDefault = L.icon({
-        iconUrl: 'img/marker-icon.png',
-        shadowUrl: 'img/marker-shadow.png',
-    });
-
-    // add layer
-    this.layer = L.layerGroup().addTo(this.map);
-    this.updateMarkers(this.props.markersData);
+  const options = {
+    chart: {
+      map: mapData,
+      marginLeft: 50,
+    },
+  
+    title: {
+      text: ''
+    },
+  
+    mapNavigation: {
+      enabled: false
+    },
+  
+    tooltip: {
+      headerFormat: '',
+      pointFormat: '<b>{point.name}</b><br>Lat: {point.lat}, Lon: {point.lon}'
+    },
+  
+    series: [{
+      name: 'Basemap',
+      borderColor: '#A0A0A0',
+      nullColor: 'rgba(200, 200, 200, 0.3)',
+      showInLegend: false
+    }, {
+      name: 'Separators',
+      type: 'mapline',
+      nullColor: '#707070',
+      showInLegend: false,
+      enableMouseTracking: false
+    }, {
+      type: 'mappoint',
+      name: 'Communities',
+      color: orange[500],
+      showInLegend: false,
+      data: markersData
+    }]
   }
-  updateMarkers(markersData) {
-    markersData.forEach(marker => {
-      L.marker(marker.latLng, { title: marker.title, icon: this.customDefault }).addTo(this.layer);
-    });
-  }
-  render() {
-  return (
-    <Grid item sm={12} id="map" style={style} />
-    );
-  }
+
+  return <HighchartsReact highcharts={Highcharts} constructorType={'mapChart'} options={options} />
 }
-
 export default Map;

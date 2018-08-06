@@ -7,38 +7,28 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import StatusIcon from './StatusIcon'
-
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
+import StatusIcon from './StatusIcon';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: '10px',
     overflowX: 'auto',
-  },
-  table: {
-   
-  },
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+  },/*
   row: {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default,
     },
-  },
+  },*/
 });
 
 let id = 0;
-function createData(name, Status1, Status2, Status3) {
+function createData(name, Hub, Device, Battery) {
   id += 1;
-  return { id, name, Status1, Status2, Status3 };
+  return { id, name, Hub, Device, Battery };
 }
 
 const data = [
@@ -48,11 +38,7 @@ const data = [
   createData('Houston', 0, 1, 0),
   createData('Phoenix', 2, 0, 1),
   createData('Philadelphia', 2, 0, 0),
-  createData('San Antonia', 1, 0, 2),
-  createData('San Diego', 0, 0, 1),
-  createData('Dallas', 0, 0, 0),
-  createData('San Jose', 0, 1, 0),
-  createData('Austin', 0, 0, 0),
+  createData('Chicago', 2, 0, 2),
 ];
 
 function CommunitiesStatus(props) {
@@ -60,30 +46,35 @@ function CommunitiesStatus(props) {
 
   return (
     <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <CustomTableCell padding="dense">Community Name</CustomTableCell>
-            <CustomTableCell numeric padding="dense">Status1</CustomTableCell>
-            <CustomTableCell numeric padding="dense">Status2</CustomTableCell>
-            <CustomTableCell numeric padding="dense">Status3</CustomTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map(n => {
-            return (
-              <TableRow className={classes.row} key={n.id}>
-                <CustomTableCell component="th" scope="row" padding="dense">
-                  {n.name}
-                </CustomTableCell>
-                <CustomTableCell numeric padding="dense"><StatusIcon status = {n.Status1} /></CustomTableCell>
-                <CustomTableCell numeric padding="dense"><StatusIcon status = {n.Status2} /></CustomTableCell>
-                <CustomTableCell numeric padding="dense"><StatusIcon status = {n.Status3} /></CustomTableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+        <Typography variant="headline" component="h3">
+          Community Status
+        </Typography>
+        <Table className={classes.table}>
+            <TableHead>
+            <TableRow>
+                <TableCell padding="dense"></TableCell>
+                <TableCell padding="dense"><Typography variant="subheading">Hub</Typography></TableCell>
+                <TableCell padding="dense"><Typography variant="subheading">Device</Typography></TableCell>
+                <TableCell padding="dense"><Typography variant="subheading">Battery</Typography></TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
+            {data.map(n => {
+                return (
+                <TableRow className={classes.row} key={n.id}>
+                    <TableCell component="th" scope="row" padding="dense">
+                        <Typography variant="body1">
+                            {n.name}
+                        </Typography>    
+                    </TableCell>
+                    <TableCell padding="dense"><StatusIcon status = {n.Hub} /></TableCell>
+                    <TableCell padding="dense"><StatusIcon status = {n.Device} /></TableCell>
+                    <TableCell padding="dense"><StatusIcon status = {n.Battery} /></TableCell>
+                </TableRow>
+                );
+            })}
+            </TableBody>
+        </Table>  
     </Paper>
   );
 }

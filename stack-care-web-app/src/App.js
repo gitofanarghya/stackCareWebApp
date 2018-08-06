@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
+import '../node_modules/react-vis/dist/style.css';
 import LoginComponent from './components/LoginComponent';
 import NavBar from './components/NavBar';
-import NavBarDrawer from './components/NavBarDrawer';
+//import NavBarDrawer from './components/NavBarDrawer';
 import Home from './components/Home';
 import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
+import { Route } from "react-router-dom";
+import CommunityPage from './components/CommunityPage';
 
 class App extends Component {
   state = {
-    auth: false,
+    auth: true,
     accessToken: ""
   }
 
@@ -29,11 +32,10 @@ class App extends Component {
   render() {
     return (
       this.state.auth ? 
-        <NavBarDrawer>
-          <div className={classNames("flex", "flex-row")}>
-            <Home />
-          </div>
-        </NavBarDrawer>
+        <NavBar>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/:communityID" component={CommunityPage} />
+        </NavBar>
       :
         <NavBar>
             <Grid container className={classNames("App", "flex-item", "loginGrid")} justify="center" alignItems="center">
