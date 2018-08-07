@@ -4,7 +4,6 @@ import Notifications from './Notifications'
 import CommunitiesStatus from './CommunitiesStatus'
 import Grid from '@material-ui/core/Grid'
 import classNames from 'classnames'
-import SearchBar from './SearchBar'
 import Typography from '@material-ui/core/Typography';
 
 export default class Home extends React.Component {
@@ -24,52 +23,31 @@ export default class Home extends React.Component {
           ]
     }
     render () {
-        return (/*
-            <Grid item sm={2} className={classNames("flex", "refreshContainer")}>
-            
-            </Grid>
-            <Grid item sm={2} className={classNames("flex", "filterContainer")}>
-            
-            </Grid>*/
-            <Grid container className="flex" justify="center" alignItems="stretch">
-                <Grid item xs={10} className="flex">
+        return (
+            <Grid container className="flex" alignItems="stretch" direction="row" justify="space-around">
+                <Grid item sm={6} className={classNames("flex", "padded")}>
+                    <CommunitiesStatus />
+                </Grid>
+                <Grid item sm={6} className={classNames("flex", "padded")}>
                     <Grid container className="flex" alignItems="stretch" direction="column" justify="space-around">
-                        <Grid item className={classNames("flex", "topGridContainer", "padded2x")}>
-                            <Grid container className="flex" alignItems="stretch" direction="row" justify="center">
-                                <Grid item sm={6} className={classNames("flex", "searchBarContainer")} alignItems="center">
-                                    <SearchBar />
-                                </Grid>
-                            </Grid>
+                        <Grid item sm className={classNames("flex", "mapContainer")}>
+                            <Map markersData={this.state.markersData}/>
                         </Grid>
-                        <Grid item className={classNames("flex", "bottomGridContainer", "padded")}>
-                            <Grid container className="flex" alignItems="stretch" direction="row" justify="space-around">
-                                <Grid item sm={6} className={classNames("flex", "padded")}>
-                                    <CommunitiesStatus />
+                        <Grid item sm className={classNames("flex", "graphDiv")}>
+                            <Grid container className={classNames("flex", "graphContainer")} alignItems="stretch" direction="column" justify="space-around">
+                                <Grid item sm className="title">
+                                    <Typography variant="headline" component="h3">
+                                        Notifications
+                                    </Typography>
                                 </Grid>
-                                <Grid item sm={6} className={classNames("flex", "padded")}>
-                                    <Grid container className="flex" alignItems="stretch" direction="column" justify="space-around">
-                                        <Grid item sm className={classNames("flex", "mapContainer")}>
-                                            <Map markersData={this.state.markersData}/>
-                                        </Grid>
-                                        <Grid item sm className={classNames("flex", "graphDiv")}>
-                                            <Grid container className={classNames("flex", "graphContainer")} alignItems="stretch" direction="column" justify="space-around">
-                                                <Grid item sm className="title">
-                                                    <Typography variant="headline" component="h3">
-                                                        Notifications
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item sm className="flex">
-                                                    <Notifications />
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
+                                <Grid item sm className="flex">
+                                    <Notifications />
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid>                       
         )
     }
 }
