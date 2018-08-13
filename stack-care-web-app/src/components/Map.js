@@ -49,6 +49,7 @@ const Map = ({markersData}) => {
       data: markersData
     }]
   }
+  
 
   return <HighchartsReact highcharts={Highcharts} constructorType={'mapChart'} options={options} />
 }

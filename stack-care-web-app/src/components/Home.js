@@ -22,11 +22,14 @@ export default class Home extends React.Component {
             { lat: 30.3039, lon: -97.7544, name: 'Austin'}
           ]
     }
+
+
+
     render () {
         return (
             <Grid container className="flex" alignItems="stretch" direction="row" justify="space-around">
                 <Grid item sm={6} className={classNames("flex", "padded")}>
-                    <CommunitiesStatus />
+                    <CommunitiesStatus communities={this.props.communities}/>
                 </Grid>
                 <Grid item sm={6} className={classNames("flex", "padded")}>
                     <Grid container className="flex" alignItems="stretch" direction="column" justify="space-around">

@@ -1,11 +1,7 @@
-.App {
-  background-image: url('/img/preorder-background-1.png');
-  background-repeat: no-repeat;
-}
-
-.logobg {
+.logo-bg {
   background-image: url('/img/logo.png');
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .App-grid {

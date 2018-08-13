@@ -32,7 +32,6 @@ class LoginComponent extends Component {
 
     handleLogin = (e) => {
         e.preventDefault()
-        console.log(`e: ${e.toString()}`)
 
         let data = JSON.stringify({
             "grant_type": "password",

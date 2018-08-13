@@ -17,11 +17,8 @@ function SimpleAppBar(props) {
   const { classes, children } = props;
   return (
     <div className={classNames(classes.root, "container-column", "flex-item")}>
-        <AppBar className={classes.AppBar} position="static" color="primary">
-            <Toolbar>
-            <Typography variant="title" color="inherit">
-                Stack Care Web App
-            </Typography>
+        <AppBar className={classes.AppBar} position="static" color="secondary">
+            <Toolbar className="logo-bg">
             </Toolbar>
         </AppBar>
         <main className={classNames("container-column", "flex-item")}>

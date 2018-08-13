@@ -13,11 +13,11 @@ const options = {
 
         // set up the updating of the chart each second
         var series = this.series[0];
-        setInterval(function () {
+        /*setInterval(function () {
           var x = (new Date()).getTime(), // current time
             y = Math.random();
           series.addPoint([x, y], true, true);
-        }, 30000);
+        }, 30000);*/
       }
     }
   },
