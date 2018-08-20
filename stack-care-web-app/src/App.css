@@ -159,7 +159,7 @@ main {
 }
 
 .bulbIcon {
-  background-image: url(/img/Light-Bulb-30.png);
+  background-image: url(/img/bulb.png);
   width: 50px;
   height: 80px;
   background-size: contain;
@@ -167,7 +167,7 @@ main {
 }
 
 .sensorIcon {
-  background-image: url(/img/chip.png);
+  background-image: url(/img/sensor.png);
   width: 50px;
   height: 80px;
   background-size: contain;
