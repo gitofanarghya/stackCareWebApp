@@ -31,8 +31,7 @@ class IntegrationReactSelect extends React.Component {
 
 
   handleChange = value => {
-
-    this.props.history.push(`/${value.value}/${value.label}`);
+     if(value) this.props.history.push(`/${value.value}/${value.label}`)  
   };
   
   render() {

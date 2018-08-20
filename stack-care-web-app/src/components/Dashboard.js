@@ -6,6 +6,7 @@ import SearchBar from './SearchBar';
 import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
 import NavBar from './NavBar';
+import Loading from './Loading'
 
 export default class Dashboard extends Component {
 
@@ -19,7 +20,7 @@ export default class Dashboard extends Component {
     componentDidMount() {
         
         let data = null
-        fetch( "https://care-api-staging.appspot.com/communities?get_all=true", {
+        fetch( "https://care-api-staging.appspot.com/communities?get_all=1", {
             method: "GET",
             mode: "cors",
             cache: "no-cache",
@@ -55,7 +56,7 @@ export default class Dashboard extends Component {
       
       </Grid>*/
       return(
-        this.state.isLoading ? <p> LOADING..... </p> :
+        this.state.isLoading ? <Loading /> :
         <NavBar>
             <Grid container className="flex" justify="center" alignItems="stretch">
                 <Grid item xs={10} className="flex">
@@ -69,7 +70,7 @@ export default class Dashboard extends Component {
                         </Grid>
                         <Grid item className={classNames("flex", "bottomGridContainer", "padded")}>
                             <Route exact path="/" render={routeProps => <Home {...routeProps} communities={this.state.allCommunities} />} />
-                            <Route exact path="/:communityId/:communityName" render={routeProps => <CommunityPage {...routeProps} accessToken={this.props.accessToken} />} />
+                            <Route exact path="/:communityId/:communityName" render={routeProps => <CommunityPage {...routeProps} accessToken={this.props.accessToken}/>} />
                         </Grid>
                     </Grid>
                 </Grid>

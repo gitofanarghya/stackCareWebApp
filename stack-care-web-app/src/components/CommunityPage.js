@@ -18,6 +18,48 @@ export default class CommunityPage extends React.Component {
         unit: null
     }
 
+    setUnit = (unit) => {
+        console.log(unit)
+        this.setState({
+            unit: unit
+        })
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.communityId !== prevProps.match.params.communityId) {
+          fetch( `https://care-api-staging.appspot.com/units?community_id=${this.props.match.params.communityId}`, {
+                method: "GET",
+                mode: "cors",
+                cache: "no-cache",
+                credentials: "omit",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    "Authorization": `Bearer ${this.props.accessToken}`
+                },
+                body: null,
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong ...');
+                }
+            })
+            .then(response => {
+                this.setState({ 
+                        allUnits: response,
+                        commId: this.props.match.params.communityId,
+                        communityName: this.props.match.params.communityName,
+                        isLoading: false,
+                        unit: null
+                    })
+            })
+            .catch(error => {
+                this.setState({ error, isLoading: false })
+            })
+        }
+    }
+
     componentDidMount() {
         let data = null
         fetch( `https://care-api-staging.appspot.com/units?community_id=${this.state.commId}`, {
@@ -51,11 +93,11 @@ export default class CommunityPage extends React.Component {
             this.state.isLoading ? <p> LOADING..... </p> :
             <Grid container className="flex" alignItems="stretch" direction="row" justify="space-around">
                 <Grid item sm={6} className={classNames("flex", "padded")}>
-                    <SiteList units={this.state.allUnits} communityName={this.state.communityName} />
+                    <SiteList units={this.state.allUnits} communityName={this.state.communityName} setUnit={this.setUnit} />
                 </Grid>
                 <Grid item sm={6} className={classNames("flex", "padded")}>
                     {
-                        this.state.unit ? <DeviceList /> : <Placeholder />
+                        this.state.unit ? <DeviceList unit={this.state.unit} accessToken={this.props.accessToken} /> : <Placeholder />
                     }
                 </Grid>
             </Grid>

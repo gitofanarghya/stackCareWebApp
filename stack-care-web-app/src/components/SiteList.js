@@ -54,7 +54,7 @@ function SiteList(props) {
   return (
     <Paper className={classes.root}>
         <Typography className={classes.heading} variant="headline" component="h3">
-          <p>PARC Summary - {props.communityName}</p>
+          <p>{props.communityName} - Summary</p>
         </Typography>
         <Table className={classes.table}>
             <TableHead>
@@ -67,7 +67,12 @@ function SiteList(props) {
             <TableBody>
             {data.map(n => {
                 return (
-                <TableRow className={classes.rowRed} key={n.id}>
+                <TableRow 
+                  hover
+                  onClick={() => props.setUnit(n)}
+                  className={classes.rowRed} 
+                  key={n.id}
+                >
                     <TableCell component="th" scope="row" padding="dense">
                         <Typography variant="body1">
                             {n.name}
