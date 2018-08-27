@@ -89,7 +89,7 @@ class DeviceList extends React.Component {
     const rest = {
         zones: zones,
         bulbs: bulbs,
-        sensors: sensors,
+        sensors: sensors,  
         switches: switches,
         unit: unit
     }
@@ -194,7 +194,24 @@ class DeviceList extends React.Component {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                    {this.state.device ? JSON.stringify(this.state.device, null, 4) : 'nothing'}
+                    {this.state.device ? 
+                    <center>
+                    <div>
+                        <Typography>Device ID: {this.state.device.id}</Typography>
+                        <Typography>Mac ID: {this.state.device.mac_address}</Typography>
+                        <Typography>Net Address: {this.state.device.network_address}</Typography>
+                        <br />
+                        <Typography>Manu: {this.state.device.manufacturer}</Typography>
+                        <Typography>Model: {this.state.device.model}</Typography>
+                        <Typography>HW ver: {this.state.device.hw_vs}</Typography>
+                        <Typography>Firmware: {this.state.device.firmware_vs}</Typography>
+                        <br />
+                        <Typography>Created: {this.state.device.created_at}</Typography>
+                        <Typography>Joined: {this.state.device.last_joined_at}</Typography>
+                        <Typography>Contact: {this.state.device.last_contact_time}</Typography>
+                    </div>
+                    </center>
+                        : 'nothing'}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

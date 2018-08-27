@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import StatusIcon from './StatusIcon';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom'
+import { sort_by } from './data-helpers'
 
 const styles = theme => ({
   root: {
@@ -41,7 +42,7 @@ class CommunitiesStatus extends React.Component {
       Device: this.getRandomInt(3),
       Battery: this.getRandomInt(3),
       commId: community.id
-    }))
+    })).sort(sort_by('Hub', 'Device', 'Battery'));
 
     return (
       <Paper className={classes.root}>
@@ -52,7 +53,7 @@ class CommunitiesStatus extends React.Component {
               <TableHead>
               <TableRow>
                   <TableCell padding="dense"></TableCell>
-                  <TableCell padding="dense"><Typography variant="subheading">Hub</Typography></TableCell>
+                  <TableCell padding="dense"><Typography variant="subheading" >Hub</Typography></TableCell>
                   <TableCell padding="dense"><Typography variant="subheading">Device</Typography></TableCell>
                   <TableCell padding="dense"><Typography variant="subheading">Battery</Typography></TableCell>
               </TableRow>

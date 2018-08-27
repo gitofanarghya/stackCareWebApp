@@ -69,7 +69,7 @@ export default class Dashboard extends Component {
                             </Grid>
                         </Grid>
                         <Grid item className={classNames("flex", "bottomGridContainer", "padded")}>
-                            <Route exact path="/" render={routeProps => <Home {...routeProps} communities={this.state.allCommunities} />} />
+                            <Route exact path="/" render={routeProps => <Home {...routeProps} communities={this.state.allCommunities} accessToken={this.props.accessToken} />} />
                             <Route exact path="/:communityId/:communityName" render={routeProps => <CommunityPage {...routeProps} accessToken={this.props.accessToken}/>} />
                         </Grid>
                     </Grid>
